@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using CDES_WebApi.Models;
 using System.Web.Http.Description;
 using PhoneNumbers;
-using System.Threading.Tasks;
 using CDES_WebApi.Utils;
-using System.Net.Http;
 using System;
 
 namespace CDES_WebApi.Controllers
@@ -17,6 +14,7 @@ namespace CDES_WebApi.Controllers
     {
         private PhoneNumberUtil _util;
         private PhoneNumberOfflineGeocoder _geoCoder;
+        
 
         public PhoneValidationController() { }
         /// <summary>
