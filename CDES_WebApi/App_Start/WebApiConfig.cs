@@ -14,11 +14,21 @@ namespace CDES_WebApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            // Web API routes
+          
+
+            //config.Routes.MapHttpRoute(
+            //    name: "Index",
+            //    routeTemplate: "",
+            //    defaults: new { controller = "Values", action = "Index" }
+            //);
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new { id = RouteParameter.Optional, controller = "Values" }
             );
+            
         }
     }
 }
