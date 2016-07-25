@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDES_WebApi.DI.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -13,7 +14,7 @@ namespace CDES_WebApi
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
+            config.DependencyResolver = new UnityDependencyResolver(BootStrapDI.Container);
             // Web API routes
           
 

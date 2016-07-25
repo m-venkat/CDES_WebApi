@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDES_WebApi.DI.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,10 +15,14 @@ namespace CDES_WebApi
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+           // ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+            DI.Unity.BootStrapDI.RegisterDependencies();
+
         }
     }
 }
