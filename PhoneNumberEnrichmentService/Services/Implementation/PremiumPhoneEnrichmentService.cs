@@ -46,6 +46,9 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
                     enriched.IsValidPhone = regionCoundFromPhoneNumber == isoCountryCodeFromInput && _util.IsValidNumber(phonenumberObject);
                     enriched.InternationalFormat = _util.Format(phonenumberObject, PhoneNumberFormat.INTERNATIONAL);
                     enriched.NationalFormat = _util.Format(phonenumberObject, PhoneNumberFormat.NATIONAL);
+                    (enriched as PhonePremiumEnriched).ServiceCoordinates.Latitude = enriched.IsValidPhone ? new Random().Next(100, 500) : Double.NaN;
+                    (enriched as PhonePremiumEnriched).ServiceCoordinates.Longitude = enriched.IsValidPhone ? new Random().Next(600, 1000) : Double.NaN;
+                   
                
                 }
 
@@ -63,8 +66,14 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
         }
 
         public List<PhoneEnriched> EnrichPhoneNumber(List<PhoneInputToEnrich> inputPhoneListToEnrich)
-        {
-            return new List<PhoneEnriched>();
+        {            
+            List<Task<PhoneEnriched>> list = new List<Task<PhoneEnriched>>();
+            foreach (PhoneInputToEnrich record in inputPhoneListToEnrich)
+            {
+                list.Add(Task.Run(() => EnrichPhoneNumber(record)));
+            }
+             Task.WhenAll(list).Wait();
+            return list.Select(t=> t.Result).ToList<PhoneEnriched>();
         }
     }
 }

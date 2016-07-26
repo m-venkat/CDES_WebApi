@@ -21,7 +21,6 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
             _geocoder = PhoneNumberOfflineGeocoder.GetInstance();
         }
 
-
       
         public PhoneEnriched EnrichPhoneNumber(PhoneInputToEnrich inputPhoneToEnrich)
         {
@@ -64,7 +63,13 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
 
         public List<PhoneEnriched> EnrichPhoneNumber(List<PhoneInputToEnrich> inputPhoneListToEnrich)
         {
-            return new List<PhoneEnriched>();
+            List<Task<PhoneEnriched>> list = new List<Task<PhoneEnriched>>();
+            foreach (PhoneInputToEnrich record in inputPhoneListToEnrich)
+            {
+                list.Add(Task.Run(() => EnrichPhoneNumber(record)));
+            }
+            Task.WhenAll(list).Wait();
+            return list.Select(t => t.Result).ToList<PhoneEnriched>();
         }
     }
 }
