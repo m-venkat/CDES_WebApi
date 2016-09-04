@@ -23,7 +23,7 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
 
                 
 
-        public PhoneEnriched EnrichPhoneNumber(PhoneInputToEnrich inputPhoneToEnrich)
+        public virtual PhoneEnriched EnrichPhoneNumber(PhoneInputToEnrich inputPhoneToEnrich)
         {
             PhoneNumber phonenumberObject = null;
             PhoneEnriched enriched = new PhonePremiumEnriched();           
@@ -65,7 +65,7 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
             return enriched;
         }
 
-        public List<PhoneEnriched> EnrichPhoneNumber(List<PhoneInputToEnrich> inputPhoneListToEnrich)
+        public virtual List<PhoneEnriched> EnrichPhoneNumber(List<PhoneInputToEnrich> inputPhoneListToEnrich)
         {            
             List<Task<PhoneEnriched>> list = new List<Task<PhoneEnriched>>();
             foreach (PhoneInputToEnrich record in inputPhoneListToEnrich)

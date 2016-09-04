@@ -22,7 +22,7 @@ namespace PhoneNumberEnrichmentService.Services.Implementation
         }
 
       
-        public PhoneEnriched EnrichPhoneNumber(PhoneInputToEnrich inputPhoneToEnrich)
+        public virtual PhoneEnriched EnrichPhoneNumber(PhoneInputToEnrich inputPhoneToEnrich)
         {
             PhoneNumber phonenumberObject = null;
             PhoneEnriched enriched = new PhoneEnriched();           

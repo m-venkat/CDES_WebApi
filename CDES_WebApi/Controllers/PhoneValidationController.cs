@@ -59,7 +59,7 @@ namespace CDES_WebApi.Controllers
         /// <param name="inputPhone">Input Object with Regular and Business Phone Number to Enrich</param>
         /// <returns></returns>
         [Route("EnrichPhoneList")]
-        [ResponseType(typeof(List<PhoneEnriched>))]
+        [ResponseType(typeof(List<IPhoneEnriched>))]
         [HttpPost]//Just retreiving the data, Not updating/creating resource Hence Get
         public IHttpActionResult Validate_And_Enrich_Phone(List<PhoneInputToEnrich> inputPhone)
         {

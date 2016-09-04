@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using CDES_WebApi.ServiceExtension;
+using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using PhoneNumberEnrichmentService.Models;
 using PhoneNumberEnrichmentService.Services;
@@ -47,7 +48,8 @@ namespace CDES_WebApi.DI.Unity
         {
             if (_unityContainer == null)
                 InitializeContainer();
-            _unityContainer.RegisterType<IPhoneEnrichment, PremiumPhoneEnrichmentService>();
+            //Making singleton object
+            _unityContainer.RegisterType<IPhoneEnrichment, PhoneEnrichmentWithCallCounter>();// (new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<IPhoneEnriched, PhonePremiumEnriched>();
 
         }
